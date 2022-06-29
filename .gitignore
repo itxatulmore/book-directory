@@ -1,0 +1,6 @@
+.svn/
+dist/
+node_modules/
+*.lock
+debug.log
+uploads/
