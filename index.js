@@ -9,14 +9,18 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // connect to database
-mongoose.connect(
-  process.env.DB_CONNECT,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  () => console.log("connected to db")
-);
+mongoose
+  .connect(process.env.DB_CONNECT)
+  .then((res) => {
+    console.log("Hurry Connection built");
+  })
+  .catch((err) => {
+    console.log("Oops Connection  faild");
+  });
 
 // Import routes
 const bookRoutes = require("./routes/bookRoute");
+const userRoutes = require("./routes/userRoute");
 
 // Middlewares
 app.use(express.json());
@@ -24,5 +28,8 @@ app.use(cors());
 
 // route Middlewares
 app.use("/api/books", bookRoutes);
+app.use("/api/user", userRoutes);
 
-app.listen(port, () => console.log("App listening on port " + port));
+app.listen(port, () =>
+  console.log("App listening on port " + port, typeof process.env.DB_CONNECT)
+);

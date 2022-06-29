@@ -13,7 +13,7 @@ const book_all = async (req, res) => {
 // Single book
 const book_details = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.productId);
+    const book = await Book.findById(req.params.id);
     res.json(book);
   } catch (error) {
     res.json({ message: error });
@@ -52,7 +52,7 @@ const book_update = async (req, res) => {
     };
 
     const updatedProduct = await Book.findByIdAndUpdate(
-      { _id: req.params.bookId },
+      { _id: req.params.id },
       book
     );
     res.json(updatedProduct);
